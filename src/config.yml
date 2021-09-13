@@ -3,3 +3,13 @@ border:
     x: 0
     y: 0
   radius: 1000
+recipe:
+  1: "GLASS"
+  2: "GLASS"
+  3: "GLASS"
+  4: "GLASS"
+  5: "GHAST_TEAR"
+  6: "GLASS"
+  7: "GLASS"
+  8: "GLASS"
+  9: "GLASS"
