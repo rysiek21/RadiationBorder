@@ -3,6 +3,8 @@ border:
     x: 0
     y: 0
   radius: 1000
+potion:
+  time: 60
 recipe:
   1: "GLASS"
   2: "GLASS"
