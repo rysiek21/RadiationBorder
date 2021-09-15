@@ -21,3 +21,4 @@ messages:
   leave: "&7[&aRadiationBorder&7] &aYou leave from the radiation zone"
   potion-end: "&7[&aRadiationBorder&7] &aAnti-Radiation potion ends"
   potion-warning: "&7[&aRadiationBorder&7] &aAnti-Radiation potion ends in 30 seconds"
+  potion-name: "&aAnti-Radiation potion"

@@ -46,7 +46,7 @@ public class Main extends JavaPlugin {
 	void CreateRecipe() {
 		ItemStack item = new ItemStack(Material.POTION);
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(ChatColor.GREEN + "Anti-Radiation potion");
+		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', config.getString("messages.potion-name")));
 		item.setItemMeta(meta);
 		
 		NamespacedKey key = new NamespacedKey(this, "radiation_potion");
