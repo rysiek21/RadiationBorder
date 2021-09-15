@@ -15,6 +15,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 
 public class PluginListeners implements Listener{
@@ -22,6 +23,7 @@ public class PluginListeners implements Listener{
 	public List<Player> playersToDamage = new ArrayList<>();
 	public List<Player> noDamagePlayers = new ArrayList<>();
 	int damageTask;
+	int noDamageTask;
 	
 	@EventHandler
 	void PlayerMove(PlayerMoveEvent e) {
@@ -35,12 +37,12 @@ public class PluginListeners implements Listener{
 		if(e.getTo().getBlockX() > xp || e.getTo().getBlockX() < xm || e.getTo().getBlockZ() > zp || e.getTo().getBlockZ() < zm) {
 			if (!playersToDamage.contains(p)) {
 				playersToDamage.add(p);
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&aRadiationBorder&7] &cYou enter to the radiation zone"));
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("messages.enter")));
 			}
 		}else {
 			if(playersToDamage.contains(p)) {
 				playersToDamage.remove(p);
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&aRadiationBorder&7] &aYou leave from the radiation zone"));
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("messages.leave")));
 			}
 		}
 	}
@@ -63,6 +65,7 @@ public class PluginListeners implements Listener{
 						noDamagePlayers.add(p);
 						p.getInventory().remove(e.getItem());
 						p.getInventory().addItem(new ItemStack(Material.GLASS_BOTTLE));
+						NoDamageTimer(p);
 					}
 				}
 			}
@@ -82,5 +85,24 @@ public class PluginListeners implements Listener{
                	}
             }
         }, 0L, 20L);
+	}
+	
+	public void NoDamageTimer(Player p) {
+		FileConfiguration config = Main.getConfigFile();
+		new BukkitRunnable() {
+			int time = config.getInt("potion.time");
+			@Override
+			public void run() {
+            	if(time == 0) {
+            		noDamagePlayers.remove(p);
+            		p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("messages.potion-end")));
+            		cancel();
+            	}
+            	if(time == config.getInt("potion.warning")) {
+            		p.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("messages.potion-warning")));
+            	}
+            	time--;
+			}
+		}.runTaskTimer(Main.getPlugin(), 0L, 20L);
 	}
 }

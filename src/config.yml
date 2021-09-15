@@ -5,6 +5,7 @@ border:
   radius: 1000
 potion:
   time: 60
+  warning: 30
 recipe:
   1: "GLASS"
   2: "GLASS"
@@ -15,3 +16,8 @@ recipe:
   7: "GLASS"
   8: "GLASS"
   9: "GLASS"
+messages:
+  enter: "&7[&aRadiationBorder&7] &cYou enter to the radiation zone"
+  leave: "&7[&aRadiationBorder&7] &aYou leave from the radiation zone"
+  potion-end: "&7[&aRadiationBorder&7] &aAnti-Radiation potion ends"
+  potion-warning: "&7[&aRadiationBorder&7] &aAnti-Radiation potion ends in 30 seconds"
