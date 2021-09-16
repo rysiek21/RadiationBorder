@@ -27,6 +27,7 @@ public class Main extends JavaPlugin {
 		registerEvents(this, pluginListeners);
 		pluginListeners.DamagePlayer();
 		CreateRecipe();
+		getCommand("radiationborder").setExecutor(new Commands());
 	}
 	
 	public static void registerEvents(org.bukkit.plugin.Plugin plugin, Listener... listeners) {
@@ -43,13 +44,20 @@ public class Main extends JavaPlugin {
 		return config;
 	}
 	
-	void CreateRecipe() {
+	public static void ReloadConfig() {
+		getPlugin().reloadConfig();
+		config = getPlugin().getConfig();
+		Bukkit.removeRecipe(new NamespacedKey(getPlugin(), "radiation_potion"));
+		CreateRecipe();
+    }
+	
+	
+	static void CreateRecipe() {
 		ItemStack item = new ItemStack(Material.POTION);
 		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', config.getString("messages.potion-name")));
 		item.setItemMeta(meta);
-		
-		NamespacedKey key = new NamespacedKey(this, "radiation_potion");
+		NamespacedKey key = new NamespacedKey(getPlugin(), "radiation_potion");
 		ShapedRecipe recipe = new ShapedRecipe(key, item);
 		recipe.shape("ABC","DEF","GHI");
 		recipe.setIngredient('A', Material.getMaterial(config.getString("recipe.1")));
@@ -61,7 +69,6 @@ public class Main extends JavaPlugin {
 		recipe.setIngredient('G', Material.getMaterial(config.getString("recipe.7")));
 		recipe.setIngredient('H', Material.getMaterial(config.getString("recipe.8")));
 		recipe.setIngredient('I', Material.getMaterial(config.getString("recipe.9")));
-		
 		Bukkit.addRecipe(recipe);
 		
 	}

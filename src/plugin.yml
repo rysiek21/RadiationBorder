@@ -2,3 +2,5 @@ name: RadiationBorder
 main: me.rysiek21.RadiationBorder.Main
 version: 1.0
 commands:
+  Radiationborder:
+    description: Main command

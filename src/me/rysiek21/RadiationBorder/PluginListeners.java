@@ -61,7 +61,6 @@ public class PluginListeners implements Listener{
 		FileConfiguration config = Main.getConfigFile();
 		if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			if (e.getItem() != null) {
-				//if(e.getItem().getType() == Material.POTION && e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GREEN + "Anti-Radiation potion")) {
 				if(e.getItem().getType() == Material.POTION && e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', config.getString("messages.potion-name")))) {
 					if(!noDamagePlayers.contains(p)) {
 						noDamagePlayers.add(p);
