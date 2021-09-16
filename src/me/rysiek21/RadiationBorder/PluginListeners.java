@@ -64,7 +64,7 @@ public class PluginListeners implements Listener{
 				if(e.getItem().getType() == Material.POTION && e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', config.getString("messages.potion-name")))) {
 					if(!noDamagePlayers.contains(p)) {
 						noDamagePlayers.add(p);
-						p.getInventory().remove(e.getItem());
+						p.getInventory().removeItem(e.getItem());
 						p.getInventory().addItem(new ItemStack(Material.GLASS_BOTTLE));
 						NoDamageTimer(p);
 					}
