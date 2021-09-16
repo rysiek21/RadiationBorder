@@ -1,6 +1,11 @@
 name: RadiationBorder
 main: me.rysiek21.RadiationBorder.Main
+author: rysiek21
 version: 1.0
 commands:
   Radiationborder:
     description: Main command
+permissions:
+  radiationborder.admin:
+    description: Access to the admin commands.
+    default: op
